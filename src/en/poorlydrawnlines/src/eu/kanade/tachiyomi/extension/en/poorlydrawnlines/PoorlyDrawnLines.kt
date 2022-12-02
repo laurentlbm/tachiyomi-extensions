@@ -16,6 +16,7 @@ import okhttp3.HttpUrl.Companion.toHttpUrl
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.Response
+import org.jsoup.parser.Parser
 import rx.Observable
 import uy.kohesive.injekt.injectLazy
 import java.text.SimpleDateFormat
@@ -129,7 +130,7 @@ class PoorlyDrawnLines : HttpSource() {
     }
 
     private fun chapterFromObject(obj: PoorlyDrawnLinesChapterDto): SChapter = SChapter.create().apply {
-        name = obj.title.rendered
+        name = Parser.unescapeEntities(obj.title.rendered, false)
         date_upload = obj.date.toDate()
         setUrlWithoutDomain(obj.link)
     }
