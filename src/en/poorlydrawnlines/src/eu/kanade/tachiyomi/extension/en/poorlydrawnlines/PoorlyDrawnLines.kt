@@ -34,7 +34,7 @@ class PoorlyDrawnLines : HttpSource() {
 
     override val supportsLatest = false
     override val client: OkHttpClient = network.client.newBuilder()
-        .rateLimit(1, 2, TimeUnit.SECONDS)
+        .rateLimit(5, 1, TimeUnit.SECONDS)
         .build()
 
     private val json: Json by injectLazy()
